@@ -47,6 +47,7 @@ export const translations = {
       code: 'Código',
       viewLive: 'Ver ao Vivo',
       close: 'Fechar',
+      technologiesUsed: 'Tecnologias Utilizadas',
       projects: [
         {
           title: 'Plataforma de E-Commerce',
@@ -104,6 +105,10 @@ export const translations = {
       copyright: 'Todos os direitos reservados.',
       backToTop: 'Voltar ao topo',
     },
+    header: {
+      portuguese: 'Português',
+      english: 'English',
+    },
   },
   en: {
     navigation: {
@@ -151,6 +156,7 @@ export const translations = {
       code: 'Code',
       viewLive: 'View Live',
       close: 'Close',
+      technologiesUsed: 'Technologies Used',
       projects: [
         {
           title: 'E-Commerce Platform',
@@ -207,6 +213,10 @@ export const translations = {
       connect: 'Connect',
       copyright: 'All rights reserved.',
       backToTop: 'Back to top',
+    },
+    header: {
+      portuguese: 'Português',
+      english: 'English',
     },
   },
 };

@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from './Header';
-import Home from './Home';
-import About from './About';
-import Stacks from './Stacks';
-import Projects from './Projects';
-import Contact from './Contact';
-import Footer from './Footer';
+import Header from './layout/Header';
+import Home from './pages/Home';
+import About from './pages/About';
+import Stacks from './pages/Stacks';
+import Projects from './pages/Projects';
+import Contact from './pages/Contact';
+import Footer from './layout/Footer';
 
 const Portfolio: React.FC = () => {
   return (

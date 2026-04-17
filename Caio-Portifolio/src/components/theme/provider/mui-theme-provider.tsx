@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { ThemeProvider } from '@mui/material/styles'
 import CssBaseline from '@mui/material/CssBaseline'
-import { lightTheme, darkTheme } from '../theme'
-import { ThemeProviderContext } from './theme-context'
+import { lightTheme, darkTheme } from '../../../theme'
+import { ThemeProviderContext } from '../context/theme-context'
 
 type ThemeType = 'light' | 'dark' | 'system'
 

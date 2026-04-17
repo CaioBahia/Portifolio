@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Container, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
-import { useTranslation } from '../i18n/useTranslation';
+import { useTranslation } from '../../i18n/useTranslation';
 
 const Home: React.FC = () => {
   const theme = useTheme();

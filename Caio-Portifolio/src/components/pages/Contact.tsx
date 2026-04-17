@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Card, useTheme, Stack, Alert } from '@mui/material';
 import { Mail, Phone, GitHub, LinkedIn } from '@mui/icons-material';
+import { useTranslation } from '../../i18n/useTranslation';
 
 interface FormData {
   name: string;
@@ -15,6 +16,7 @@ interface FormStatus {
 
 const Contact: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<FormStatus>({});
   const [loading, setLoading] = useState(false);
@@ -31,10 +33,10 @@ const Contact: React.FC = () => {
     try {
       // Simulated form submission
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      setStatus({ type: 'success', message: 'Message sent successfully! I\'ll get back to you soon.' });
+      setStatus({ type: 'success', message: t.contact.successMessage });
       setFormData({ name: '', email: '', message: '' });
     } catch {
-      setStatus({ type: 'error', message: 'Failed to send message. Please try again.' });
+      setStatus({ type: 'error', message: t.contact.errorMessage });
     } finally {
       setLoading(false);
     }
@@ -54,8 +56,8 @@ const Contact: React.FC = () => {
       sx={{
         py: 12,
         background: theme.palette.mode === 'dark'
-          ? 'linear-gradient(135deg, #0a0e27 0%, #0f3460 100%)'
-          : 'linear-gradient(135deg, #f5f7fa 0%, #e0e7ff 100%)',
+          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
+          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
       }}
     >
       <Container maxWidth="md">
@@ -73,7 +75,7 @@ const Contact: React.FC = () => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Get In Touch
+            {t.contact.title}
           </Typography>
           <Typography
             variant="body1"
@@ -84,7 +86,7 @@ const Contact: React.FC = () => {
               mx: 'auto',
             }}
           >
-            I'm always interested in hearing about new projects and opportunities.
+            {t.contact.subtitle}
           </Typography>
         </Box>
 
@@ -101,7 +103,7 @@ const Contact: React.FC = () => {
             }}
           >
             <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }}>
-              Send me a message
+              {t.contact.contactTitle}
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
               {status.message && (
@@ -111,7 +113,7 @@ const Contact: React.FC = () => {
               )}
               <TextField
                 name="name"
-                label="Your Name"
+                label={t.contact.name}
                 value={formData.name}
                 onChange={handleChange}
                 fullWidth
@@ -127,7 +129,7 @@ const Contact: React.FC = () => {
               />
               <TextField
                 name="email"
-                label="Your Email"
+                label={t.contact.email}
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -136,7 +138,7 @@ const Contact: React.FC = () => {
               />
               <TextField
                 name="message"
-                label="Your Message"
+                label={t.contact.message}
                 multiline
                 rows={4}
                 value={formData.message}
@@ -158,7 +160,7 @@ const Contact: React.FC = () => {
                   },
                 }}
               >
-                {loading ? 'Sending...' : 'Send Message'}
+                {loading ? t.contact.sending : t.contact.send}
               </Button>
             </Box>
           </Card>
@@ -166,7 +168,7 @@ const Contact: React.FC = () => {
           {/* Contact Links */}
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
             <Typography variant="h6" sx={{ fontWeight: 700 }}>
-              Other ways to reach me
+              {t.contact.otherWays}
             </Typography>
             <Stack spacing={2}>
               {contactLinks.map((item) => (
@@ -205,10 +207,10 @@ const Contact: React.FC = () => {
                       {item.label}
                     </Typography>
                     <Typography variant="caption" color="text.secondary">
-                      {item.label === 'Email' && 'Send me an email'}
-                      {item.label === 'Phone' && 'Give me a call'}
-                      {item.label === 'GitHub' && 'Check my projects'}
-                      {item.label === 'LinkedIn' && 'Connect with me'}
+                      {item.label === 'Email' && t.contact.sendEmail}
+                      {item.label === 'Phone' && t.contact.callMe}
+                      {item.label === 'GitHub' && t.contact.checkProjects}
+                      {item.label === 'LinkedIn' && t.contact.connectWithMe}
                     </Typography>
                   </Box>
                 </Card>

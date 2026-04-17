@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, useTheme, Tabs, Tab } from '@mui/material';
-import { useTranslation } from '../i18n/useTranslation';
+import { useTranslation } from '../../i18n/useTranslation';
 
 interface StackItem {
   name: string;
@@ -207,10 +207,6 @@ const Stacks: React.FC = () => {
                             ? '0 12px 24px rgba(139, 92, 246, 0.2)'
                             : '0 12px 24px rgba(16, 185, 129, 0.15)',
                         },
-                        '&:hover .tech-label': {
-                          opacity: 1,
-                          transform: 'translateY(0)',
-                        },
                       }}
                     >
                       {/* Icon/Emoji */}
@@ -226,23 +222,6 @@ const Stacks: React.FC = () => {
                       >
                         {item.icon}
                       </Box>
-
-                      {/* Label on Hover */}
-                      <Typography
-                        className="tech-label"
-                        variant="caption"
-                        sx={{
-                          fontSize: '0.85rem',
-                          fontWeight: 600,
-                          textAlign: 'center',
-                          opacity: 0,
-                          transform: 'translateY(10px)',
-                          transition: 'all 0.3s ease',
-                          color: 'text.secondary',
-                        }}
-                      >
-                        {item.name}
-                      </Typography>
                     </Box>
                   ))}
                 </Box>

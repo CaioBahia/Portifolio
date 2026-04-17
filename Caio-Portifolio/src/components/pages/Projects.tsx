@@ -14,6 +14,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { GitHub as GitHubIcon, OpenInNew as OpenInNewIcon } from '@mui/icons-material';
+import { useTranslation } from '../../i18n/useTranslation';
 
 interface Project {
   id: string;
@@ -96,6 +97,7 @@ const projects: Project[] = [
 
 const Projects: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isDark = theme.palette.mode === 'dark';
   const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
   const purpleGradient = isDark
@@ -103,6 +105,18 @@ const Projects: React.FC = () => {
     : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)';
   const boxShadowColor = isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(16, 185, 129, 0.15)';
   const [openDialog, setOpenDialog] = useState<string | null>(null);
+
+  // Create projects array with translations
+  const projectsData: Project[] = t.projects.projects.map((translatedProject: any, index: number) => ({
+    id: `project-${index + 1}`,
+    title: translatedProject.title,
+    description: translatedProject.description,
+    fullDescription: translatedProject.fullDescription,
+    image: projects[index]?.image || '',
+    technologies: projects[index]?.technologies || [],
+    githubUrl: projects[index]?.githubUrl || 'https://github.com',
+    liveUrl: projects[index]?.liveUrl,
+  }));
 
   const handleOpenDialog = (projectId: string) => {
     setOpenDialog(projectId);
@@ -112,7 +126,7 @@ const Projects: React.FC = () => {
     setOpenDialog(null);
   };
 
-  const currentProject = projects.find((p) => p.id === openDialog);
+  const currentProject = projectsData.find((p) => p.id === openDialog);
 
   return (
     <Box
@@ -140,7 +154,7 @@ const Projects: React.FC = () => {
               WebkitTextFillColor: 'transparent',
             }}
           >
-            Featured Projects
+            {t.projects.title}
           </Typography>
           <Typography
             variant="body1"
@@ -151,7 +165,7 @@ const Projects: React.FC = () => {
               mx: 'auto',
             }}
           >
-            A selection of projects I've built and contributed to
+            {t.projects.subtitle}
           </Typography>
         </Box>
 
@@ -167,7 +181,7 @@ const Projects: React.FC = () => {
             gap: 3,
           }}
         >
-          {projects.map((project) => (
+          {projectsData.map((project) => (
             <Card
               key={project.id}
               sx={{
@@ -246,7 +260,7 @@ const Projects: React.FC = () => {
                     },
                   }}
                 >
-                  Learn More
+                  {t.projects.learnMore}
                 </Button>
                 <Button
                   size="small"
@@ -262,7 +276,7 @@ const Projects: React.FC = () => {
                     },
                   }}
                 >
-                  Code
+                  {t.projects.code}
                 </Button>
               </Box>
             </Card>
@@ -292,7 +306,7 @@ const Projects: React.FC = () => {
               {currentProject.fullDescription}
             </Typography>
             <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 1 }}>
-              Technologies Used:
+              {t.projects.technologiesUsed}
             </Typography>
             <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
               {currentProject.technologies.map((tech) => (
@@ -301,7 +315,7 @@ const Projects: React.FC = () => {
             </Box>
           </DialogContent>
           <DialogActions sx={{ p: 2, borderTop: `1px solid ${theme.palette.divider}` }}>
-            <Button onClick={handleCloseDialog}>Close</Button>
+            <Button onClick={handleCloseDialog}>{t.projects.close}</Button>
             {currentProject.liveUrl && (
               <Button
                 variant="contained"
@@ -310,7 +324,7 @@ const Projects: React.FC = () => {
                 rel="noopener noreferrer"
                 endIcon={<OpenInNewIcon />}
               >
-                View Live
+                {t.projects.viewLive}
               </Button>
             )}
             <Button
@@ -320,7 +334,7 @@ const Projects: React.FC = () => {
               rel="noopener noreferrer"
               endIcon={<GitHubIcon />}
             >
-              GitHub
+              {t.projects.code}
             </Button>
           </DialogActions>
         </Dialog>

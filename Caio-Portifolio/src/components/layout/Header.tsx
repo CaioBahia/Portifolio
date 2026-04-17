@@ -14,9 +14,9 @@ import {
   MenuItem,
 } from '@mui/material';
 import { GitHub, LinkedIn, Mail, Brightness4, Brightness7, Language } from '@mui/icons-material';
-import { useTheme as useCustomTheme } from './use-theme';
-import { useTranslation } from '../i18n/useTranslation';
-import { LanguageContext } from '../i18n/LanguageContext';
+import { useTheme as useCustomTheme } from '../shared/hooks/use-theme';
+import { useTranslation } from '../../i18n/useTranslation';
+import { LanguageContext } from '../../i18n/LanguageContext';
 import { useContext } from 'react';
 
 const Header: React.FC = () => {
@@ -127,8 +127,8 @@ const Header: React.FC = () => {
                 },
               }}
             >
-              <MenuItem value="pt">Português</MenuItem>
-              <MenuItem value="en">English</MenuItem>
+              <MenuItem value="pt">{t.header.portuguese}</MenuItem>
+              <MenuItem value="en">{t.header.english}</MenuItem>
             </Select>
 
             {/* Theme Toggle */}
