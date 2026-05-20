@@ -63,15 +63,30 @@ const Header: React.FC = () => {
           {/* Navigation */}
           <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
             {[
-              { label: t.navigation.home, href: '#home' },
-              { label: t.navigation.about, href: '#about' },
-              { label: t.navigation.skills, href: '#stacks' },
-              { label: t.navigation.projects, href: '#projects' },
-              { label: t.navigation.contact, href: '#contact' },
+              { label: t.navigation.home, href: 'home' },
+              { label: t.navigation.about, href: 'about' },
+              { label: t.navigation.skills, href: 'stacks' },
+              { label: t.navigation.projects, href: 'projects' },
+              { label: t.navigation.contact, href: 'contact' },
             ].map((item) => (
               <Button
                 key={item.href}
-                href={item.href}
+                onClick={() => {
+                  const element = document.getElementById(item.href);
+
+                  if (element) {
+                    const offset = 40 ;
+                    const bodyRect = document.body.getBoundingClientRect().top;
+                    const elementRect = element.getBoundingClientRect().top;
+                    const elementPosition = elementRect - bodyRect;
+                    const offsetPosition = elementPosition - offset;
+
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth',
+                    });
+                  }
+                }}
                 sx={{
                   color: 'inherit',
                   fontSize: '0.95rem',
@@ -85,7 +100,7 @@ const Header: React.FC = () => {
                     width: 0,
                     height: 2,
                     background: gradientColor,
-                    transition: 'width 0.3s ease',
+                    transition: 'all 0.3s ease',
                   },
                   '&:hover::after': {
                     width: '100%',
