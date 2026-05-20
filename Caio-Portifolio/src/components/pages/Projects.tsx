@@ -25,6 +25,9 @@ interface Project {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
+  isUnderConstruction?: boolean;
+  constructionEmoji?: string;
+  constructionText?: string;
 }
 
 const projects: Project[] = [
@@ -38,6 +41,9 @@ const projects: Project[] = [
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
+    isUnderConstruction: false,
+    constructionEmoji: '🔨',
+    constructionText: 'Em desenvolvimento',
   },
   {
     id: 'project-2',
@@ -49,6 +55,9 @@ const projects: Project[] = [
     technologies: ['React', 'Firebase', 'WebSocket', 'Material-UI'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
+    isUnderConstruction: true,
+    constructionEmoji: '⚙️',
+    constructionText: 'Em desenvolvimento',
   },
   {
     id: 'project-3',
@@ -60,6 +69,9 @@ const projects: Project[] = [
     technologies: ['React', 'TypeScript', 'OpenWeather API', 'Mapbox'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
+    isUnderConstruction: true,
+    constructionEmoji: '🚀',
+    constructionText: 'Em desenvolvimento',
   },
   {
     id: 'project-4',
@@ -71,6 +83,9 @@ const projects: Project[] = [
     technologies: ['React', 'Express', 'PostgreSQL', 'AWS S3'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
+    isUnderConstruction: true,
+    constructionEmoji: '🛠️',
+    constructionText: 'Em desenvolvimento',
   },
   {
     id: 'project-5',
@@ -81,6 +96,9 @@ const projects: Project[] = [
     image: '🎨',
     technologies: ['React', 'Storybook', 'TypeScript', 'Tailwind CSS'],
     githubUrl: 'https://github.com',
+    isUnderConstruction: true,
+    constructionEmoji: '🚧',
+    constructionText: 'Em desenvolvimento',
   },
   {
     id: 'project-6',
@@ -92,6 +110,9 @@ const projects: Project[] = [
     technologies: ['React', 'D3.js', 'Node.js', 'PostgreSQL'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
+    isUnderConstruction: true,
+    constructionEmoji: '🔨',
+    constructionText: 'Em desenvolvimento',
   },
 ];
 
@@ -108,15 +129,18 @@ const Projects: React.FC = () => {
 
   // Create projects array with translations
   const projectsData: Project[] = t.projects.projects.map((translatedProject: any, index: number) => ({
-    id: `project-${index + 1}`,
-    title: translatedProject.title,
-    description: translatedProject.description,
-    fullDescription: translatedProject.fullDescription,
-    image: projects[index]?.image || '',
-    technologies: projects[index]?.technologies || [],
-    githubUrl: projects[index]?.githubUrl || 'https://github.com',
-    liveUrl: projects[index]?.liveUrl,
-  }));
+  id: `project-${index + 1}`,
+  title: translatedProject.title,
+  description: translatedProject.description,
+  fullDescription: translatedProject.fullDescription,
+  image: projects[index]?.image || '',
+  technologies: projects[index]?.technologies || [],
+  githubUrl: projects[index]?.githubUrl || 'https://github.com',
+  liveUrl: projects[index]?.liveUrl,
+  isUnderConstruction: projects[index]?.isUnderConstruction || false,
+  constructionEmoji: projects[index]?.constructionEmoji,
+  constructionText: projects[index]?.constructionText || 'Em desenvolvimento',
+}));
 
   const handleOpenDialog = (projectId: string) => {
     setOpenDialog(projectId);
@@ -182,104 +206,175 @@ const Projects: React.FC = () => {
           }}
         >
           {projectsData.map((project) => (
-            <Card
+            <Box
               key={project.id}
               sx={{
+                position: 'relative',
                 height: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                background: purpleGradient,
-                border: `1px solid ${theme.palette.divider}`,
-                transition: 'all 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: `0 12px 24px ${boxShadowColor}`,
-                },
               }}
             >
-              {/* Project Icon/Image */}
-              <Box
+              <Card
                 sx={{
-                  fontSize: '3rem',
-                  textAlign: 'center',
-                  py: 3,
-                  background: isDark
-                    ? 'rgba(139, 92, 246, 0.1)'
-                    : 'rgba(16, 185, 129, 0.05)',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  background: purpleGradient,
+                  border: `1px solid ${theme.palette.divider}`,
+                  transition: 'all 0.3s ease',
+                  filter: project.isUnderConstruction ? 'blur(3px)' : 'none',
+                  pointerEvents: project.isUnderConstruction ? 'none' : 'auto',
+                  '&:hover': {
+                    transform: !project.isUnderConstruction ? 'translateY(-8px)' : 'none',
+                    boxShadow: !project.isUnderConstruction ? `0 12px 24px ${boxShadowColor}` : 'none',
+                  },
                 }}
               >
-                {project.image}
-              </Box>
+                {/* Project Icon/Image */}
+                <Box
+                  sx={{
+                    fontSize: '3rem',
+                    textAlign: 'center',
+                    py: 3,
+                    background: isDark
+                      ? 'rgba(139, 92, 246, 0.1)'
+                      : 'rgba(16, 185, 129, 0.05)',
+                  }}
+                >
+                  {project.image}
+                </Box>
 
-              <CardContent sx={{ flexGrow: 1 }}>
-                <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
-                  {project.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ mb: 3, lineHeight: 1.6 }}>
-                  {project.description}
-                </Typography>
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography variant="h6" sx={{ fontWeight: 700, mb: 1 }}>
+                    {project.title}
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3, lineHeight: 1.6 }}>
+                    {project.description}
+                  </Typography>
 
-                {/* Technologies */}
-                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                  {project.technologies.map((tech) => (
-                    <Chip
-                      key={tech}
-                      label={tech}
-                      size="small"
-                      variant="outlined"
+                  {/* Technologies */}
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                    {project.technologies.map((tech) => (
+                      <Chip
+                        key={tech}
+                        label={tech}
+                        size="small"
+                        variant="outlined"
+                        sx={{
+                          fontSize: '0.75rem',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            transform: 'scale(1.05)',
+                          },
+                        }}
+                      />
+                    ))}
+                  </Box>
+                </CardContent>
+
+                {/* Actions */}
+                <Box
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    gap: 1,
+                    borderTop: `1px solid ${theme.palette.divider}`,
+                  }}
+                >
+                  <Button
+                    size="small"
+                    variant="outlined"
+                    onClick={() => handleOpenDialog(project.id)}
+                    sx={{
+                      flex: 1,
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                      },
+                    }}
+                  >
+                    {t.projects.learnMore}
+                  </Button>
+                  <Button
+                    size="small"
+                    variant="text"
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    endIcon={<GitHubIcon sx={{ fontSize: '1rem' }} />}
+                    sx={{
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        transform: 'translateY(-2px)',
+                      },
+                    }}
+                  >
+                    {t.projects.code}
+                  </Button>
+                </Box>
+              </Card>
+
+              {/* Under Construction Badge */}
+              {project.isUnderConstruction && (
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    pointerEvents: 'none',
+                    zIndex: 10,
+                    gap: 2,
+                  }}
+                >
+                  {/* Emoji */}
+                  {project.constructionEmoji && (
+                    <Box
                       sx={{
-                        fontSize: '0.75rem',
-                        transition: 'all 0.3s ease',
-                        '&:hover': {
-                          transform: 'scale(1.05)',
+                        fontSize: '3.5rem',
+                        animation: 'float 3s ease-in-out infinite',
+                        '@keyframes float': {
+                          '0%, 100%': { transform: 'translateY(0px)' },
+                          '50%': { transform: 'translateY(-10px)' },
                         },
                       }}
-                    />
-                  ))}
-                </Box>
-              </CardContent>
+                    >
+                      {project.constructionEmoji}
+                    </Box>
+                  )}
 
-              {/* Actions */}
-              <Box
-                sx={{
-                  p: 2,
-                  display: 'flex',
-                  gap: 1,
-                  borderTop: `1px solid ${theme.palette.divider}`,
-                }}
-              >
-                <Button
-                  size="small"
-                  variant="outlined"
-                  onClick={() => handleOpenDialog(project.id)}
-                  sx={{
-                    flex: 1,
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-2px)',
-                    },
-                  }}
-                >
-                  {t.projects.learnMore}
-                </Button>
-                <Button
-                  size="small"
-                  variant="text"
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  endIcon={<GitHubIcon sx={{ fontSize: '1rem' }} />}
-                  sx={{
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateY(-2px)',
-                    },
-                  }}
-                >
-                  {t.projects.code}
-                </Button>
-              </Box>
-            </Card>
+                  {/* Badge */}
+                  <Box
+                    sx={{
+                      background: isDark 
+                        ? 'rgba(139, 92, 246, 0.35)' 
+                        : 'rgba(16, 185, 129, 0.35)',
+                      backdropFilter: 'blur(4px)',
+                      padding: '16px 24px',
+                      borderRadius: '8px',
+                      border: isDark 
+                        ? '2px solid rgba(167, 139, 250, 0.9)' 
+                        : '2px solid rgba(16, 185, 129, 0.9)',
+                    }}
+                  >
+                    <Typography
+                      sx={{
+                        fontSize: '1.25rem',
+                        fontWeight: 700,
+                        color: isDark ? '#F0E7FF' : '#10B981',
+                        letterSpacing: '1px',
+                      }}
+                    >
+                      {project.constructionText || 'Em desenvolvimento'}
+                    </Typography> 
+                  </Box>
+                </Box>
+              )}
+            </Box>
           ))}
         </Box>
       </Container>

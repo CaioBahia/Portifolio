@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Container, Typography, TextField, Button, Card, useTheme, Stack, Alert } from '@mui/material';
-import { Mail, Phone, GitHub, LinkedIn } from '@mui/icons-material';
+import { Box, Container, Typography, TextField, Button, Card, useTheme, Alert } from '@mui/material';
 import { useTranslation } from '../../i18n/useTranslation';
 
 interface FormData {
@@ -9,16 +8,11 @@ interface FormData {
   message: string;
 }
 
-interface FormStatus {
-  type?: 'success' | 'error';
-  message?: string;
-}
-
 const Contact: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<FormStatus>({});
+  const [status, setStatus] = useState<{ type?: 'success' | 'error'; message?: string }>({});
   const [loading, setLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -31,7 +25,6 @@ const Contact: React.FC = () => {
     setLoading(true);
     
     try {
-      // Simulated form submission
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setStatus({ type: 'success', message: t.contact.successMessage });
       setFormData({ name: '', email: '', message: '' });
@@ -42,12 +35,11 @@ const Contact: React.FC = () => {
     }
   };
 
-  const contactLinks = [
-    { icon: <Mail sx={{ fontSize: 28 }} />, label: 'Email', link: 'mailto:caio@example.com' },
-    { icon: <Phone sx={{ fontSize: 28 }} />, label: 'Phone', link: 'tel:+55XXXXXXX' },
-    { icon: <GitHub sx={{ fontSize: 28 }} />, label: 'GitHub', link: 'https://github.com' },
-    { icon: <LinkedIn sx={{ fontSize: 28 }} />, label: 'LinkedIn', link: 'https://linkedin.com' },
-  ];
+  const isDark = theme.palette.mode === 'dark';
+  const cardGradient = isDark
+    ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
+    : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)';
+
 
   return (
     <Box
@@ -55,13 +47,13 @@ const Contact: React.FC = () => {
       id="contact"
       sx={{
         py: 12,
-        background: theme.palette.mode === 'dark'
+        background: isDark
           ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
           : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
       }}
     >
       <Container maxWidth="md">
-        {/* Section Title */}
+        {/* Title */}
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography
             variant="h2"
@@ -69,7 +61,7 @@ const Contact: React.FC = () => {
               fontSize: { xs: '2rem', md: '3rem' },
               fontWeight: 800,
               mb: 2,
-              background: 'linear-gradient(45deg, #2196F3 30%, #21CBF3 90%)',
+              background: isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -77,40 +69,20 @@ const Contact: React.FC = () => {
           >
             {t.contact.title}
           </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: '1.1rem',
-              color: 'text.secondary',
-              maxWidth: '600px',
-              mx: 'auto',
-            }}
-          >
+          <Typography variant="body1" sx={{ fontSize: '1.1rem', color: 'text.secondary', maxWidth: '600px', mx: 'auto' }}>
             {t.contact.subtitle}
           </Typography>
         </Box>
 
-        {/* Contact Form and Links */}
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: 4 }}>
-          {/* Form */}
-          <Card
-            sx={{
-              background: theme.palette.mode === 'dark'
-                ? 'linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 203, 243, 0.05) 100%)'
-                : 'linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(33, 203, 243, 0.02) 100%)',
-              border: `1px solid ${theme.palette.divider}`,
-              p: 4,
-            }}
-          >
+        {/* Content */}
+        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+          <Card sx={{ background: cardGradient, border: `1px solid ${theme.palette.divider}`, p: 4, maxWidth: '500px', width: '100%' }}>
             <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }}>
               {t.contact.contactTitle}
             </Typography>
             <Box component="form" onSubmit={handleSubmit} sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              {status.message && (
-                <Alert severity={status.type} sx={{ animation: 'slideDown 0.3s ease' }}>
-                  {status.message}
-                </Alert>
-              )}
+              {status.message && <Alert severity={status.type}>{status.message}</Alert>}
+              
               <TextField
                 name="name"
                 label={t.contact.name}
@@ -118,15 +90,8 @@ const Contact: React.FC = () => {
                 onChange={handleChange}
                 fullWidth
                 required
-                sx={{
-                  '& .MuiOutlinedInput-root': {
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      borderColor: 'primary.main',
-                    },
-                  },
-                }}
               />
+              
               <TextField
                 name="email"
                 label={t.contact.email}
@@ -136,6 +101,7 @@ const Contact: React.FC = () => {
                 fullWidth
                 required
               />
+              
               <TextField
                 name="message"
                 label={t.contact.message}
@@ -146,77 +112,21 @@ const Contact: React.FC = () => {
                 fullWidth
                 required
               />
+              
               <Button
                 type="submit"
                 variant="contained"
                 disabled={loading}
                 sx={{
                   py: 1.5,
-                  background: 'linear-gradient(90deg, #2196F3, #21CBF3)',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-2px)',
-                    boxShadow: '0 8px 20px rgba(33, 150, 243, 0.3)',
-                  },
+                  background: isDark ? 'linear-gradient(90deg, #8B5CF6, #A78BFA)' : 'linear-gradient(90deg, #10B981, #34D399)',
+                  '&:hover': { transform: 'translateY(-2px)', boxShadow: isDark ? '0 8px 20px rgba(139, 92, 246, 0.4)' : '0 8px 20px rgba(16, 185, 129, 0.4)' },
                 }}
               >
                 {loading ? t.contact.sending : t.contact.send}
               </Button>
             </Box>
           </Card>
-
-          {/* Contact Links */}
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 700 }}>
-              {t.contact.otherWays}
-            </Typography>
-            <Stack spacing={2}>
-              {contactLinks.map((item) => (
-                <Card
-                  component="a"
-                  href={item.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  key={item.label}
-                  sx={{
-                    p: 2.5,
-                    background: theme.palette.mode === 'dark'
-                      ? 'linear-gradient(135deg, rgba(33, 150, 243, 0.1) 0%, rgba(33, 203, 243, 0.05) 100%)'
-                      : 'linear-gradient(135deg, rgba(33, 150, 243, 0.05) 0%, rgba(33, 203, 243, 0.02) 100%)',
-                    border: `1px solid ${theme.palette.divider}`,
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 2,
-                    cursor: 'pointer',
-                    textDecoration: 'none',
-                    color: 'inherit',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      transform: 'translateX(8px)',
-                      boxShadow: theme.palette.mode === 'dark'
-                        ? '0 8px 16px rgba(33, 150, 243, 0.2)'
-                        : '0 8px 16px rgba(33, 150, 243, 0.15)',
-                    },
-                  }}
-                >
-                  <Box sx={{ color: 'primary.main' }}>
-                    {item.icon}
-                  </Box>
-                  <Box>
-                    <Typography variant="subtitle2" sx={{ fontWeight: 700 }}>
-                      {item.label}
-                    </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {item.label === 'Email' && t.contact.sendEmail}
-                      {item.label === 'Phone' && t.contact.callMe}
-                      {item.label === 'GitHub' && t.contact.checkProjects}
-                      {item.label === 'LinkedIn' && t.contact.connectWithMe}
-                    </Typography>
-                  </Box>
-                </Card>
-              ))}
-            </Stack>
-          </Box>
         </Box>
       </Container>
     </Box>

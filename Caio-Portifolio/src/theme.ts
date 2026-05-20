@@ -16,8 +16,8 @@ export const lightTheme = createTheme({
       contrastText: '#fff',
     },
     background: {
-      default: '#F9FAFB', // Off-white
-      paper: '#FFFFFF', // White
+      default: '#FFFFFF', // Branco puro
+      paper: '#FFFFFF', // Branco puro
     },
     divider: '#D1FAE5', // Light green
     text: {
@@ -54,8 +54,8 @@ export const darkTheme = createTheme({
       contrastText: '#fff',
     },
     background: {
-      default: '#0F0F1E', // Very dark purple-black
-      paper: '#1A1A2E', // Dark purple-blue
+      default: '#000000', // Preto puro
+      paper: '#000000', // Preto puro
     },
     divider: '#4C1D95', // Deep purple
     text: {

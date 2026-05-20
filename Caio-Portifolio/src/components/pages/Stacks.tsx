@@ -4,7 +4,8 @@ import { useTranslation } from '../../i18n/useTranslation';
 
 interface StackItem {
   name: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
+  iconUrl?: string;
   color: string;
 }
 
@@ -28,13 +29,47 @@ const Stacks: React.FC = () => {
       value: 'frontend',
       color: 'primary',
       items: [
-        { name: 'React', icon: '⚛️', color: '#61dafb' },
-        { name: 'TypeScript', icon: '📘', color: '#3178c6' },
-        { name: 'Material-UI', icon: '🎨', color: '#007fff' },
-        { name: 'Tailwind CSS', icon: '🌬️', color: '#06b6d4' },
-        { name: 'Vite', icon: '⚡', color: '#646cff' },
-        { name: 'Redux', icon: '🔄', color: '#764abc' },
-        { name: 'Next.js', icon: '▲', color: '#000000' },
+        {
+          name: 'React',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
+          color: '#61dafb',
+        },
+        {
+          name: 'TypeScript',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
+          color: '#3178c6',
+        },
+        {
+          name: 'Material-UI',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg',
+          color: '#007fff',
+        },
+        {
+          name: 'Tailwind CSS',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+          color: '#06b6d4',
+        },
+        {
+          name: 'Vite',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
+          color: '#646cff',
+        },
+        {
+          name: 'Redux',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
+          color: '#764abc',
+        },
+        {
+          name: 'Next.js',
+          icon: '▲',
+          color: '#000000',
+        },
       ],
     },
     {
@@ -42,13 +77,47 @@ const Stacks: React.FC = () => {
       value: 'backend',
       color: 'success',
       items: [
-        { name: 'Node.js', icon: '🟢', color: '#68a063' },
-        { name: 'Express', icon: '⚙️', color: '#000000' },
-        { name: 'NestJS', icon: '🏠', color: '#e0234e' },
-        { name: 'FastAPI', icon: '⚡', color: '#009688' },
-        { name: 'Django', icon: '🌿', color: '#092e20' },
-        { name: 'REST APIs', icon: '📡', color: '#ff6b6b' },
-        { name: 'GraphQL', icon: '📊', color: '#e10098' },
+        {
+          name: 'Node.js',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
+          color: '#68a063',
+        },
+        {
+          name: 'Express',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
+          color: '#000000',
+        },
+        {
+          name: 'NestJS',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg',
+          color: '#e0234e',
+        },
+        {
+          name: 'FastAPI',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
+          color: '#009688',
+        },
+        {
+          name: 'Django',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+          color: '#092e20',
+        },
+        {
+          name: 'REST APIs',
+          icon: '📡',
+          color: '#ff6b6b',
+        },
+        {
+          name: 'GraphQL',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg',
+          color: '#e10098',
+        },
       ],
     },
     {
@@ -56,13 +125,47 @@ const Stacks: React.FC = () => {
       value: 'database',
       color: 'warning',
       items: [
-        { name: 'PostgreSQL', icon: '🐘', color: '#336791' },
-        { name: 'MySQL', icon: '🐬', color: '#00758f' },
-        { name: 'MongoDB', icon: '🍃', color: '#13aa52' },
-        { name: 'Redis', icon: '⚡', color: '#dc382d' },
-        { name: 'Firebase', icon: '🔥', color: '#ffa726' },
-        { name: 'Prisma ORM', icon: '💾', color: '#2d3748' },
-        { name: 'TypeORM', icon: '🔧', color: '#eb8000' },
+        {
+          name: 'PostgreSQL',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
+          color: '#336791',
+        },
+        {
+          name: 'MySQL',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
+          color: '#00758f',
+        },
+        {
+          name: 'MongoDB',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
+          color: '#13aa52',
+        },
+        {
+          name: 'Redis',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
+          color: '#dc382d',
+        },
+        {
+          name: 'Firebase',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
+          color: '#ffa726',
+        },
+        {
+          name: 'Prisma ORM',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg',
+          color: '#2d3748',
+        },
+        {
+          name: 'TypeORM',
+          icon: '🔧',
+          color: '#eb8000',
+        },
       ],
     },
     {
@@ -70,13 +173,47 @@ const Stacks: React.FC = () => {
       value: 'devops',
       color: 'error',
       items: [
-        { name: 'Git', icon: '🔗', color: '#f1502f' },
-        { name: 'Docker', icon: '🐳', color: '#2496ed' },
-        { name: 'GitHub Actions', icon: '⚙️', color: '#2088ff' },
-        { name: 'CI/CD', icon: '🔄', color: '#0d778c' },
-        { name: 'AWS', icon: '☁️', color: '#ff9900' },
-        { name: 'Linux', icon: '🐧', color: '#fcc624' },
-        { name: 'Webpack', icon: '📦', color: '#8dd6f9' },
+        {
+          name: 'Git',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
+          color: '#f1502f',
+        },
+        {
+          name: 'Docker',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
+          color: '#2496ed',
+        },
+        {
+          name: 'GitHub Actions',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+          color: '#2088ff',
+        },
+        {
+          name: 'CI/CD',
+          icon: '🔄',
+          color: '#0d778c',
+        },
+        {
+          name: 'AWS',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
+          color: '#ff9900',
+        },
+        {
+          name: 'Linux',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
+          color: '#fcc624',
+        },
+        {
+          name: 'Webpack',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg',
+          color: '#8dd6f9',
+        },
       ],
     },
   ];
@@ -93,7 +230,6 @@ const Stacks: React.FC = () => {
       }}
     >
       <Container maxWidth="lg">
-        {/* Section Title */}
         <Box sx={{ textAlign: 'center', mb: 8 }}>
           <Typography
             variant="h2"
@@ -111,6 +247,7 @@ const Stacks: React.FC = () => {
           >
             {t.stacks.title}
           </Typography>
+
           <Typography
             variant="body1"
             sx={{
@@ -124,7 +261,6 @@ const Stacks: React.FC = () => {
           </Typography>
         </Box>
 
-        {/* Tabs and Content */}
         <Box
           sx={{
             background: isDark
@@ -160,16 +296,12 @@ const Stacks: React.FC = () => {
                 key={category.value}
                 sx={{
                   display: activeTab === index ? 'block' : 'none',
-                  animation: activeTab === index ? 'fadeIn 0.3s ease-in' : 'none',
-                  '@keyframes fadeIn': {
-                    from: { opacity: 0 },
-                    to: { opacity: 1 },
-                  },
                 }}
               >
                 <Typography variant="h6" sx={{ mb: 4, fontWeight: 700 }}>
                   {category.label} {t.stacks.technologiesUsed}
                 </Typography>
+
                 <Box
                   sx={{
                     display: 'grid',
@@ -194,13 +326,11 @@ const Stacks: React.FC = () => {
                         p: 3,
                         borderRadius: 2,
                         background: isDark
-                          ? `linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05))`
-                          : `linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05))`,
+                          ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05))'
+                          : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05))',
                         border: `1px solid ${theme.palette.divider}`,
-                        cursor: 'pointer',
                         transition: 'all 0.3s ease',
-                        position: 'relative',
-                        overflow: 'hidden',
+                        cursor: 'pointer',
                         '&:hover': {
                           transform: 'translateY(-8px)',
                           boxShadow: isDark
@@ -209,19 +339,44 @@ const Stacks: React.FC = () => {
                         },
                       }}
                     >
-                      {/* Icon/Emoji */}
                       <Box
                         sx={{
-                          fontSize: '3rem',
-                          textAlign: 'center',
+                          width: 56,
+                          height: 56,
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
                           transition: 'transform 0.3s ease',
                           '&:hover': {
                             transform: 'scale(1.1)',
                           },
                         }}
                       >
-                        {item.icon}
+                        {item.iconUrl ? (
+                          <Box
+                            component="img"
+                            src={item.iconUrl}
+                            alt={item.name}
+                            sx={{
+                              width: '100%',
+                              height: '100%',
+                              objectFit: 'contain',
+                            }}
+                          />
+                        ) : (
+                          <Box sx={{ fontSize: '3rem' }}>{item.icon}</Box>
+                        )}
                       </Box>
+
+                      <Typography
+                        variant="body2"
+                        sx={{
+                          fontWeight: 600,
+                          textAlign: 'center',
+                        }}
+                      >
+                        {item.name}
+                      </Typography>
                     </Box>
                   ))}
                 </Box>

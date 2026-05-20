@@ -32,7 +32,7 @@ export const translations = {
       journeyText2: 'Quando não estou codificando, você me encontra explorando novas tecnologias, contribuindo para open source, ou compartilhando conhecimento com a comunidade de desenvolvedores.',
     },
     stacks: {
-      title: 'Minha Stack de Tecnologia',
+      title: 'Minhas Stacks de Tecnologia',
       subtitle: 'Tecnologias e ferramentas que uso para construir aplicações incríveis',
       frontend: 'Front-end',
       backend: 'Back-end',

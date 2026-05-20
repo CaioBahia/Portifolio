@@ -7,7 +7,6 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  useScrollTrigger,
   alpha,
   useTheme,
   Select,
@@ -24,31 +23,28 @@ const Header: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext) || { language: 'pt', setLanguage: () => {} };
   const { t } = useTranslation();
   const muiTheme = useTheme();
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 100,
-  });
 
   const isDark =
     customTheme === 'dark' || (customTheme === 'system' && muiTheme.palette.mode === 'dark');
 
   const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
+  const headerBg = isDark
+    ? 'rgba(15, 15, 30, 0.85)'
+    : 'rgba(249, 250, 251, 0.85)';
 
   return (
     <AppBar
-      elevation={trigger ? 8 : 0}
+      elevation={0}
       sx={{
-        background: trigger
-          ? gradientColor
-          : muiTheme.palette.background.paper,
+        background: headerBg,
         backdropFilter: 'blur(10px)',
-        backgroundColor: alpha(muiTheme.palette.background.paper, 0.8),
         borderBottom: `1px solid ${muiTheme.palette.divider}`,
         transition: 'all 0.3s ease',
+        color: isDark ? '#ffffff' : '#1a1a1a',
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ py: 1, justifyContent: 'space-between' }}>
+        <Toolbar sx={{ py: 1, justifyContent: 'space-between', color: 'inherit' }}>
           {/* Logo */}
           <Typography
             variant="h5"
@@ -61,7 +57,7 @@ const Header: React.FC = () => {
               cursor: 'pointer',
             }}
           >
-            Caio
+            Caio Bahia
           </Typography>
 
           {/* Navigation */}
@@ -102,13 +98,13 @@ const Header: React.FC = () => {
 
             {/* Social Icons */}
             <Box sx={{ display: 'flex', gap: 0.5, ml: 2 }}>
-              <IconButton size="small" href="https://github.com" target="_blank" rel="noopener">
+              <IconButton size="small" href="https://github.com/caiobahia" target="_blank" rel="noopener">
                 <GitHub sx={{ fontSize: 20 }} />
               </IconButton>
-              <IconButton size="small" href="https://linkedin.com" target="_blank" rel="noopener">
+              <IconButton size="small" href="https://linkedin.com/in/caiobahia" target="_blank" rel="noopener">
                 <LinkedIn sx={{ fontSize: 20 }} />
               </IconButton>
-              <IconButton size="small" href="mailto:seu-email@exemplo.com">
+              <IconButton size="small" href="mailto:caiobahia.dev@gmail.com">
                 <Mail sx={{ fontSize: 20 }} />
               </IconButton>
             </Box>
@@ -121,8 +117,12 @@ const Header: React.FC = () => {
               startAdornment={<Language sx={{ mr: 1, fontSize: 20 }} />}
               sx={{
                 ml: 1,
-                backgroundColor: alpha(muiTheme.palette.primary.main, 0.1),
+                color: isDark ? '#ffffff' : '#1a1a1a',
+                backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
                 '& .MuiOutlinedInput-notchedOutline': {
+                  borderColor: isDark ? 'rgba(255, 255, 255, 0.3)' : 'rgba(0, 0, 0, 0.2)',
+                },
+                '&:hover .MuiOutlinedInput-notchedOutline': {
                   borderColor: muiTheme.palette.primary.main,
                 },
               }}
