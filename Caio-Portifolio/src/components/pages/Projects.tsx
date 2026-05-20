@@ -41,7 +41,7 @@ const projects: Project[] = [
     technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
     githubUrl: 'https://github.com',
     liveUrl: 'https://example.com',
-    isUnderConstruction: false,
+    isUnderConstruction: true,
     constructionEmoji: '🔨',
     constructionText: 'Em desenvolvimento',
   },

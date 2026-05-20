@@ -36,6 +36,12 @@ const Stacks: React.FC = () => {
           color: '#61dafb',
         },
         {
+          name: 'Angular.js',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angularjs/angularjs-plain.svg',
+          color: '#61dafb',
+        },
+        {
           name: 'TypeScript',
           iconUrl:
             'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
@@ -50,7 +56,7 @@ const Stacks: React.FC = () => {
         {
           name: 'Tailwind CSS',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg',
+            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg',
           color: '#06b6d4',
         },
         {
@@ -59,17 +65,6 @@ const Stacks: React.FC = () => {
             'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vitejs/vitejs-original.svg',
           color: '#646cff',
         },
-        {
-          name: 'Redux',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redux/redux-original.svg',
-          color: '#764abc',
-        },
-        {
-          name: 'Next.js',
-          icon: '▲',
-          color: '#000000',
-        },
       ],
     },
     {
@@ -77,6 +72,18 @@ const Stacks: React.FC = () => {
       value: 'backend',
       color: 'success',
       items: [
+        {
+          name: 'Java',
+          iconUrl:
+            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/java/java-original.svg',
+          color: '#68a063',
+        },
+        {
+          name: 'Python',
+            iconUrl:
+              'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-plain.svg',
+          color: '#68a063',
+        },
         {
           name: 'Node.js',
           iconUrl:
@@ -92,31 +99,13 @@ const Stacks: React.FC = () => {
         {
           name: 'NestJS',
           iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg',
+            'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg',
           color: '#e0234e',
-        },
-        {
-          name: 'FastAPI',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
-          color: '#009688',
-        },
-        {
-          name: 'Django',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
-          color: '#092e20',
         },
         {
           name: 'REST APIs',
           icon: '📡',
           color: '#ff6b6b',
-        },
-        {
-          name: 'GraphQL',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg',
-          color: '#e10098',
         },
       ],
     },
@@ -136,25 +125,7 @@ const Stacks: React.FC = () => {
           iconUrl:
             'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
           color: '#00758f',
-        },
-        {
-          name: 'MongoDB',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
-          color: '#13aa52',
-        },
-        {
-          name: 'Redis',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
-          color: '#dc382d',
-        },
-        {
-          name: 'Firebase',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg',
-          color: '#ffa726',
-        },
+        },      
         {
           name: 'Prisma ORM',
           iconUrl:
@@ -197,23 +168,12 @@ const Stacks: React.FC = () => {
           color: '#0d778c',
         },
         {
-          name: 'AWS',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg',
-          color: '#ff9900',
-        },
-        {
           name: 'Linux',
           iconUrl:
             'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
           color: '#fcc624',
         },
-        {
-          name: 'Webpack',
-          iconUrl:
-            'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webpack/webpack-original.svg',
-          color: '#8dd6f9',
-        },
+      
       ],
     },
   ];
