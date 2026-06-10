@@ -13,8 +13,9 @@ import {
 } from '@mui/material';
 import { GitHub, LinkedIn, Mail, Brightness4, Brightness7, Language } from '@mui/icons-material';
 import { useTheme as useCustomTheme } from '../shared/hooks/use-theme';
+import { useThemeColors } from '../shared/hooks';
 import { useTranslation } from '../../i18n/useTranslation';
-import { LanguageContext } from '../../i18n/LanguageContext';
+import { LanguageContext } from '../../i18n/language-context';
 
 const Header: React.FC = () => {
   const { theme: customTheme, setTheme } = useCustomTheme();
@@ -41,11 +42,7 @@ const Header: React.FC = () => {
 
   const isDark =
     customTheme === 'dark' || (customTheme === 'system' && muiTheme.palette.mode === 'dark');
-
-  const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
-  const headerBg = isDark
-    ? 'rgba(15, 15, 30, 0.85)'
-    : 'rgba(249, 250, 251, 0.85)';
+  const { gradientColor, headerBg } = useThemeColors();
 
   return (
     <AppBar
@@ -146,7 +143,7 @@ const Header: React.FC = () => {
             <Box sx={{ display: 'flex', gap: 0.5, ml: { xs: 0, md: 2 }, alignItems: 'center', flexWrap: 'wrap' }}>
               <IconButton
                 size="small"
-                href="https://github.com/caiobahia"
+                href="https://github.com/CaioBahia"
                 target="_blank"
                 rel="noopener"
                 aria-label="Visit GitHub profile"
@@ -155,7 +152,7 @@ const Header: React.FC = () => {
               </IconButton>
               <IconButton
                 size="small"
-                href="https://linkedin.com/in/caiobahia"
+                href="https://linkedin.com/in/CaioBahia"
                 target="_blank"
                 rel="noopener"
                 aria-label="Visit LinkedIn profile"

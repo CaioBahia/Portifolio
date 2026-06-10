@@ -10,13 +10,13 @@ interface FeatureProps {
 
 const FeatureCard: React.FC<FeatureProps> = ({ icon, title, description }) => {
   const theme = useTheme();
-  const { purpleGradient, boxShadowColor } = useThemeColors();
+  const { sectionGradient, boxShadowColor } = useThemeColors();
 
   return (
     <Card
       sx={{
         height: '100%',
-        background: purpleGradient,
+        background: sectionGradient,
         border: `1px solid ${theme.palette.divider}`,
         transition: 'all 0.3s ease',
         '&:hover': {

@@ -44,7 +44,7 @@ const Contact: React.FC = () => {
 
   const { dotTexture, buttonGradient } = useThemeColors();
   const isDark = theme.palette.mode === 'dark';
-  const sectionBackground = isDark ? '#101638' : '#EFF4F9';
+  const sectionBackground = isDark ? '#0D132A' : '#F8FBFF';
   const sectionTexture = dotTexture;
 
   return (
@@ -69,7 +69,7 @@ const Contact: React.FC = () => {
               fontSize: { xs: '2rem', md: '3rem' },
               fontWeight: 800,
               mb: 2,
-              background: isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)',
+              background: isDark ? 'linear-gradient(45deg, #1e40af 30%, #3b82f6 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
               WebkitTextFillColor: 'transparent',
@@ -87,7 +87,7 @@ const Contact: React.FC = () => {
           <Card
             sx={{
               background: isDark
-                ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(168, 85, 247, 0.03))'
+                ? 'linear-gradient(135deg, rgba(30, 64, 175, 0.08), rgba(2, 132, 199, 0.03))'
                 : 'linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(52, 211, 153, 0.03))',
               border: `1px solid ${theme.palette.divider}`,
               borderRadius: 2,
@@ -141,7 +141,7 @@ const Contact: React.FC = () => {
                 sx={{
                   py: 1.5,
                   background: buttonGradient,
-                  '&:hover': { transform: 'translateY(-2px)', boxShadow: isDark ? '0 8px 20px rgba(139, 92, 246, 0.4)' : '0 8px 20px rgba(16, 185, 129, 0.4)' },
+                  '&:hover': { transform: 'translateY(-2px)', boxShadow: isDark ? '0 8px 20px rgba(30, 64, 175, 0.4)' : '0 8px 20px rgba(16, 185, 129, 0.4)' },
                 }}
               >
                 {loading ? t.contact.sending : t.contact.send}

@@ -42,25 +42,25 @@ export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#8B5CF6', // Purple
-      light: '#A78BFA',
-      dark: '#7C3AED',
+      main: '#1e40af', // Navy blue
+      light: '#3b82f6',
+      dark: '#1e3a8a',
       contrastText: '#fff',
     },
     secondary: {
-      main: '#A855F7', // Lighter purple
-      light: '#C084FC',
-      dark: '#9333EA',
+      main: '#0284c7', // Cyan/navy complement
+      light: '#0ea5e9',
+      dark: '#0369a1',
       contrastText: '#fff',
     },
     background: {
-      default: '#0B1228',
-      paper: '#0F1632',
+      default: '#0c1929',
+      paper: '#111e2e',
     },
-    divider: '#4C1D95', // Deep purple
+    divider: '#082f49', // Deep navy
     text: {
       primary: '#FFFFFF',
-      secondary: '#E9D5FF', // Light purple
+      secondary: '#bfdbfe', // Light blue
     },
   },
   typography: {

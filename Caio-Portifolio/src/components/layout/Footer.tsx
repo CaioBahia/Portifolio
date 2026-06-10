@@ -1,25 +1,22 @@
 import React from 'react';
 import { Box, Container, Typography, useTheme, IconButton } from '@mui/material';
 import { ArrowUpward } from '@mui/icons-material';
+import { useThemeColors } from '../shared/hooks';
 
 const Footer: React.FC = () => {
   const theme = useTheme();
   const currentYear = new Date().getFullYear();
+  const { isDark, gradientColor, footerBg } = useThemeColors();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const isDark = theme.palette.mode === 'dark';
-  const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
-
   return (
     <Box
       component="footer"
       sx={{
-        background: isDark
-          ? 'rgba(15, 15, 30, 0.92)'
-          : 'rgba(249, 250, 251, 0.96)',
+        background: footerBg,
         backdropFilter: 'blur(14px)',
         boxShadow: isDark
           ? '0 -10px 30px rgba(0, 0, 0, 0.16)'

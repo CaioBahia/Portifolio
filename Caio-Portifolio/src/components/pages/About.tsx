@@ -3,13 +3,12 @@ import { Box, Container, Typography, useTheme } from '@mui/material';
 import { Code, Palette, Bolt } from '@mui/icons-material';
 import { useTranslation } from '../../i18n/useTranslation';
 import FeatureCard from '../shared/ui/FeatureCard';
+import { useThemeColors } from '../shared/hooks';
 
 const About: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const isDark = theme.palette.mode === 'dark';
-
-  const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
+  const { gradientColor, sectionGradient, sectionBg } = useThemeColors();
 
   const features = [
     {
@@ -35,7 +34,7 @@ const About: React.FC = () => {
       id="about"
       sx={{
         py: 12,
-        backgroundColor: isDark ? '#0F0F1E' : '#F9FAFB',
+        backgroundColor: sectionBg,
       }}
     >
       <Container maxWidth="lg">
@@ -87,9 +86,7 @@ const About: React.FC = () => {
           sx={{
             mt: 8,
             p: 4,
-            background: isDark
-              ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
-              : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)',
+            background: sectionGradient,
             border: `1px solid ${theme.palette.divider}`,
             borderRadius: 2,
           }}

@@ -115,10 +115,10 @@ const Home: React.FC = () => {
                 fontSize: '1rem',
                 fontWeight: 600,
                 background: gradientColor,
-                boxShadow: isDark ? '0 4px 20px rgba(139, 92, 246, 0.3)' : '0 4px 20px rgba(16, 185, 129, 0.3)',
+                boxShadow: isDark ? '0 4px 20px rgba(30, 64, 175, 0.3)' : '0 4px 20px rgba(16, 185, 129, 0.3)',
                 transition: 'all 0.3s ease',
                 '&:hover': {
-                  boxShadow: isDark ? '0 6px 30px rgba(139, 92, 246, 0.4)' : '0 6px 30px rgba(16, 185, 129, 0.4)',
+                  boxShadow: isDark ? '0 6px 30px rgba(30, 64, 175, 0.4)' : '0 6px 30px rgba(16, 185, 129, 0.4)',
                   transform: 'translateY(-2px)',
                 },
               }}
@@ -138,7 +138,7 @@ const Home: React.FC = () => {
                 transition: 'all 0.3s ease',
                 '&:hover': {
                   borderWidth: 2,
-                  background: isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(16, 185, 129, 0.1)',
+                  background: isDark ? 'rgba(30, 64, 175, 0.1)' : 'rgba(16, 185, 129, 0.1)',
                   transform: 'translateY(-2px)',
                 },
               }}

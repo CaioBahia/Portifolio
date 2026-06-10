@@ -204,7 +204,7 @@ const Stacks: React.FC = () => {
               fontWeight: 800,
               mb: 2,
               background: isDark
-                ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)'
+                ? 'linear-gradient(45deg, #1e40af 30%, #3b82f6 90%)'
                 : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -244,9 +244,9 @@ const Stacks: React.FC = () => {
             sx={{
               px: 3,
               borderBottom: `2px solid ${theme.palette.divider}`,
-              '& .MuiTabs-indicator': {
+                '& .MuiTabs-indicator': {
                 background: isDark
-                  ? 'linear-gradient(90deg, #8B5CF6, #A78BFA)'
+                  ? 'linear-gradient(90deg, #1e40af, #3b82f6)'
                   : 'linear-gradient(90deg, #10B981, #34D399)',
               },
             }}
@@ -292,7 +292,7 @@ const Stacks: React.FC = () => {
                         p: 3,
                         borderRadius: 2,
                         background: isDark
-                          ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(168, 85, 247, 0.05))'
+                          ? 'linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(2, 132, 199, 0.05))'
                           : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.05))',
                         border: `1px solid ${theme.palette.divider}`,
                         transition: 'all 0.3s ease',
@@ -300,7 +300,7 @@ const Stacks: React.FC = () => {
                         '&:hover': {
                           transform: 'translateY(-8px)',
                           boxShadow: isDark
-                            ? '0 12px 24px rgba(139, 92, 246, 0.2)'
+                            ? '0 12px 24px rgba(30, 64, 175, 0.2)'
                             : '0 12px 24px rgba(16, 185, 129, 0.15)',
                         },
                       }}

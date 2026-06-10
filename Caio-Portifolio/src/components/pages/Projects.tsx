@@ -121,7 +121,7 @@ const projects: Project[] = [
 const Projects: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const { isDark, gradientColor, purpleGradient, boxShadowColor } = useThemeColors();
+  const { isDark, gradientColor, sectionGradient, sectionBg, boxShadowColor } = useThemeColors();
   const [openDialog, setOpenDialog] = useState<string | null>(null);
 
   // Create projects array with translations
@@ -155,9 +155,7 @@ const Projects: React.FC = () => {
       id="projects"
       sx={{
         py: 12,
-        background: isDark
-          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
+        backgroundColor: sectionBg,
       }}
     >
       <Container maxWidth="lg">
@@ -215,7 +213,7 @@ const Projects: React.FC = () => {
                   height: '100%',
                   display: 'flex',
                   flexDirection: 'column',
-                  background: purpleGradient,
+                  background: sectionGradient,
                   border: `1px solid ${theme.palette.divider}`,
                   transition: 'all 0.3s ease',
                   filter: project.isUnderConstruction ? 'blur(3px)' : 'none',
@@ -232,9 +230,9 @@ const Projects: React.FC = () => {
                     fontSize: '3rem',
                     textAlign: 'center',
                     py: 3,
-                    background: isDark
-                      ? 'rgba(139, 92, 246, 0.1)'
-                      : 'rgba(16, 185, 129, 0.05)',
+                      background: isDark
+                        ? 'rgba(30, 64, 175, 0.1)'
+                        : 'rgba(16, 185, 129, 0.05)',
                   }}
                 >
                   {project.image}
@@ -348,13 +346,13 @@ const Projects: React.FC = () => {
                   <Box
                     sx={{
                       background: isDark 
-                        ? 'rgba(139, 92, 246, 0.35)' 
+                        ? 'rgba(30, 64, 175, 0.35)' 
                         : 'rgba(16, 185, 129, 0.35)',
                       backdropFilter: 'blur(4px)',
                       padding: '16px 24px',
                       borderRadius: '8px',
                       border: isDark 
-                        ? '2px solid rgba(167, 139, 250, 0.9)' 
+                        ? '2px solid rgba(59, 130, 246, 0.9)' 
                         : '2px solid rgba(16, 185, 129, 0.9)',
                     }}
                   >
