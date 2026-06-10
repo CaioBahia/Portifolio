@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, useTheme, Tabs, Tab } from '@mui/material';
 import { useTranslation } from '../../i18n/useTranslation';
+import { useThemeColors } from '../shared/hooks';
 
 interface StackItem {
   name: string;
@@ -19,9 +20,12 @@ interface StackCategory {
 const Stacks: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
+  const { dotTexture } = useThemeColors();
   const [activeTab, setActiveTab] = useState(0);
 
   const isDark = theme.palette.mode === 'dark';
+  const sectionBackground = isDark ? '#0D132A' : '#F8FBFF';
+  const sectionTexture = dotTexture;
 
   const stackCategories: StackCategory[] = [
     {
@@ -184,9 +188,11 @@ const Stacks: React.FC = () => {
       id="stacks"
       sx={{
         py: 12,
-        background: isDark
-          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
+        backgroundColor: sectionBackground,
+        backgroundImage: sectionTexture,
+        backgroundSize: '24px 24px, 36px 36px',
+        backgroundRepeat: 'repeat',
+        backgroundBlendMode: 'normal',
       }}
     >
       <Container maxWidth="lg">
@@ -266,9 +272,9 @@ const Stacks: React.FC = () => {
                   sx={{
                     display: 'grid',
                     gridTemplateColumns: {
-                      xs: 'repeat(3, 1fr)',
-                      sm: 'repeat(4, 1fr)',
-                      md: 'repeat(5, 1fr)',
+                      xs: 'repeat(2, 1fr)',
+                      sm: 'repeat(3, 1fr)',
+                      md: 'repeat(4, 1fr)',
                       lg: 'repeat(6, 1fr)',
                     },
                     gap: 3,

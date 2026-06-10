@@ -16,6 +16,7 @@ interface FormStatus {
 
 const Contact: React.FC = () => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === 'dark';
   const { t } = useTranslation();
   const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<FormStatus>({});
@@ -35,8 +36,9 @@ const Contact: React.FC = () => {
       await new Promise((resolve) => setTimeout(resolve, 1500));
       setStatus({ type: 'success', message: t.contact.successMessage });
       setFormData({ name: '', email: '', message: '' });
-    } catch {
-      setStatus({ type: 'error', message: t.contact.errorMessage });
+      } catch (error) {
+        console.error('Form submission error:', error);
+        setStatus({ type: 'error', message: t.contact.errorMessage });
     } finally {
       setLoading(false);
     }
@@ -152,7 +154,9 @@ const Contact: React.FC = () => {
                 disabled={loading}
                 sx={{
                   py: 1.5,
-                  background: 'linear-gradient(90deg, #2196F3, #21CBF3)',
+                  background: isDark
+                    ? 'linear-gradient(90deg, rgba(139, 92, 246, 0.9) 0%, rgba(76, 29, 149, 1) 100%)'
+                    : 'linear-gradient(90deg, rgba(16, 185, 129, 1) 0%, rgba(209, 250, 229, 1) 100%)',
                   transition: 'all 0.3s ease',
                   '&:hover': {
                     transform: 'translateY(-2px)',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import {
   Box,
   Container,
@@ -7,7 +7,6 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  alpha,
   useTheme,
   Select,
   MenuItem,
@@ -16,13 +15,29 @@ import { GitHub, LinkedIn, Mail, Brightness4, Brightness7, Language } from '@mui
 import { useTheme as useCustomTheme } from '../shared/hooks/use-theme';
 import { useTranslation } from '../../i18n/useTranslation';
 import { LanguageContext } from '../../i18n/LanguageContext';
-import { useContext } from 'react';
 
 const Header: React.FC = () => {
   const { theme: customTheme, setTheme } = useCustomTheme();
   const { language, setLanguage } = useContext(LanguageContext) || { language: 'pt', setLanguage: () => {} };
   const { t } = useTranslation();
   const muiTheme = useTheme();
+  const [showHeader, setShowHeader] = useState(true);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 80) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const isDark =
     customTheme === 'dark' || (customTheme === 'system' && muiTheme.palette.mode === 'dark');
@@ -36,15 +51,29 @@ const Header: React.FC = () => {
     <AppBar
       elevation={0}
       sx={{
+        position: 'sticky',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1300,
         background: headerBg,
-        backdropFilter: 'blur(10px)',
-        borderBottom: `1px solid ${muiTheme.palette.divider}`,
-        transition: 'all 0.3s ease',
+        backdropFilter: 'blur(12px)',
+        boxShadow: isDark
+          ? '0 10px 30px rgba(0, 0, 0, 0.12)'
+          : '0 10px 30px rgba(15, 23, 42, 0.08)',
+        transition: 'transform 0.25s ease, background 0.3s ease, box-shadow 0.3s ease',
+        transform: showHeader ? 'translateY(0)' : 'translateY(-120%)',
         color: isDark ? '#ffffff' : '#1a1a1a',
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar sx={{ py: 1, justifyContent: 'space-between', color: 'inherit' }}>
+        <Toolbar
+          sx={{
+            py: 1,
+            justifyContent: 'space-between',
+            color: 'inherit',
+          }}
+        >
           {/* Logo */}
           <Typography
             variant="h5"
@@ -61,7 +90,7 @@ const Header: React.FC = () => {
           </Typography>
 
           {/* Navigation */}
-          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center' }}>
+          <Box sx={{ display: 'flex', gap: 1, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
             {[
               { label: t.navigation.home, href: 'home' },
               { label: t.navigation.about, href: 'about' },
@@ -71,6 +100,7 @@ const Header: React.FC = () => {
             ].map((item) => (
               <Button
                 key={item.href}
+                aria-label={item.label}
                 onClick={() => {
                   const element = document.getElementById(item.href);
 
@@ -88,6 +118,7 @@ const Header: React.FC = () => {
                   }
                 }}
                 sx={{
+                  display: { xs: 'none', md: 'inline-flex' },
                   color: 'inherit',
                   fontSize: '0.95rem',
                   fontWeight: 500,
@@ -112,14 +143,30 @@ const Header: React.FC = () => {
             ))}
 
             {/* Social Icons */}
-            <Box sx={{ display: 'flex', gap: 0.5, ml: 2 }}>
-              <IconButton size="small" href="https://github.com/caiobahia" target="_blank" rel="noopener">
+            <Box sx={{ display: 'flex', gap: 0.5, ml: { xs: 0, md: 2 }, alignItems: 'center', flexWrap: 'wrap' }}>
+              <IconButton
+                size="small"
+                href="https://github.com/caiobahia"
+                target="_blank"
+                rel="noopener"
+                aria-label="Visit GitHub profile"
+              >
                 <GitHub sx={{ fontSize: 20 }} />
               </IconButton>
-              <IconButton size="small" href="https://linkedin.com/in/caiobahia" target="_blank" rel="noopener">
+              <IconButton
+                size="small"
+                href="https://linkedin.com/in/caiobahia"
+                target="_blank"
+                rel="noopener"
+                aria-label="Visit LinkedIn profile"
+              >
                 <LinkedIn sx={{ fontSize: 20 }} />
               </IconButton>
-              <IconButton size="small" href="mailto:caiobahia.dev@gmail.com">
+              <IconButton
+                size="small"
+                href="mailto:caiobahia.dev@gmail.com"
+                aria-label="Send email"
+              >
                 <Mail sx={{ fontSize: 20 }} />
               </IconButton>
             </Box>
@@ -129,9 +176,11 @@ const Header: React.FC = () => {
               value={language}
               onChange={(e) => setLanguage(e.target.value as 'pt' | 'en')}
               size="small"
+              aria-label="Select language"
               startAdornment={<Language sx={{ mr: 1, fontSize: 20 }} />}
               sx={{
-                ml: 1,
+                minWidth: { xs: 80, md: 140 },
+                ml: { xs: 0, md: 1 },
                 color: isDark ? '#ffffff' : '#1a1a1a',
                 backgroundColor: isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.05)',
                 '& .MuiOutlinedInput-notchedOutline': {
@@ -149,6 +198,8 @@ const Header: React.FC = () => {
             {/* Theme Toggle */}
             <IconButton
               onClick={() => setTheme(customTheme === 'dark' ? 'light' : 'dark')}
+              aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+              aria-pressed={isDark}
               sx={{
                 ml: 1,
                 color: 'inherit',

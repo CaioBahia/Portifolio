@@ -1,73 +1,117 @@
-# React + TypeScript + Vite
+# Caio Bahia's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive portfolio website built with React, TypeScript, Vite, and Material-UI.
 
-Currently, two official plugins are available:
+## 🎯 Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+This is a full-featured portfolio application showcasing projects, skills, and professional experience with:
 
-## React Compiler
+- ✨ **Responsive Design** - Fully responsive layout for all devices
+- 🎨 **Dark/Light Theme** - Theme toggle with system preference detection
+- 🌍 **Multi-Language** - Portuguese and English translations
+- ♿ **Accessible** - WCAG 2.1 compliance
+- ⚡ **Performance Optimized** - Fast loading and smooth animations
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+- **React** 19.2.4 - UI framework
+- **TypeScript** 6.0.2 - Type-safe JavaScript
+- **Vite** 8.0.4 - Build tool with HMR
+- **Material-UI** 9.0.0 - Component library and theming
+- **Context API** - State management and i18n
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📁 Project Structure
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── components/
+│   ├── layout/        # Header, Footer layouts
+│   ├── pages/         # Page sections (Home, About, Projects, etc)
+│   ├── shared/
+│   │   ├── hooks/     # useTheme, useThemeColors
+│   │   └── ui/        # Reusable components (FeatureCard)
+│   └── theme/         # MUI theme providers
+├── i18n/              # Translations (PT/EN)
+├── types/             # Centralized TypeScript types
+├── lib/               # Utilities (cn function)
+└── assets/            # Static files
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🚀 Quick Start
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- Node.js 16+
+- npm or yarn
+
+### Installation
+
+```bash
+git clone <repo>
+cd Caio-Portifolio
+npm install
+npm run dev
 ```
+
+Visit `http://localhost:5173`
+
+## 📝 Scripts
+
+- `npm run dev` - Start dev server with HMR
+- `npm run build` - Production build with TypeScript check
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
+
+## 🎨 Customization
+
+### Add Translations
+
+Update `src/i18n/translations.ts`:
+
+```typescript
+export const translations = {
+  pt: { /* Portuguese */ },
+  en: { /* English */ }
+}
+```
+
+### Use Theme Colors Hook
+
+```typescript
+import { useThemeColors } from '@/components/shared/hooks';
+
+const { isDark, gradientColor, purpleGradient, boxShadowColor } = useThemeColors();
+```
+
+### Add New Pages
+
+1. Create file in `src/components/pages/`
+2. Add translations to `translations.ts`
+3. Import in `src/components/Portfolio.tsx`
+4. Add link in Header navigation
+
+## ♿ Accessibility
+
+- ✅ Semantic HTML
+- ✅ ARIA labels on interactive elements
+- ✅ Keyboard navigation
+- ✅ Color contrast compliance
+
+## 📦 Build Info
+
+- HTML: 0.46 kB (gzip: 0.30 kB)
+- CSS: 0.42 kB (gzip: 0.22 kB)
+- JavaScript: 481 kB (gzip: 146.95 kB)
+
+## 🔧 TypeScript Configuration
+
+Strict mode enabled:
+- `noImplicitAny: true`
+- `noUnusedLocals: true`
+- `noUnusedParameters: true`
+
+All types in `src/types/index.ts`
+
+## 📄 License
+
+© 2024 Caio Bahia. All rights reserved.

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Card, CardContent, Typography, useTheme } from '@mui/material';
+import { useThemeColors } from '../hooks';
 
 interface FeatureProps {
   icon: React.ReactNode;
@@ -9,15 +10,7 @@ interface FeatureProps {
 
 const FeatureCard: React.FC<FeatureProps> = ({ icon, title, description }) => {
   const theme = useTheme();
-  const isDark = theme.palette.mode === 'dark';
-
-  const purpleGradient = isDark
-    ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
-    : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)';
-
-  const boxShadowColor = isDark
-    ? 'rgba(139, 92, 246, 0.2)'
-    : 'rgba(16, 185, 129, 0.15)';
+  const { purpleGradient, boxShadowColor } = useThemeColors();
 
   return (
     <Card
@@ -47,4 +40,4 @@ const FeatureCard: React.FC<FeatureProps> = ({ icon, title, description }) => {
   );
 };
 
-export default FeatureCard;
+export default React.memo(FeatureCard);

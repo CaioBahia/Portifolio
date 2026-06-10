@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Container, Typography, TextField, Button, Card, useTheme, Alert } from '@mui/material';
 import { useTranslation } from '../../i18n/useTranslation';
+import { useThemeColors } from '../shared/hooks';
 
 interface FormData {
   name: string;
@@ -23,9 +24,15 @@ const Contact: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      const subject = encodeURIComponent(`Contato via portfólio de ${formData.name}`);
+      const body = encodeURIComponent(
+        `Nome: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+      );
+      const mailtoLink = `mailto:caiobahia.dev@gmail.com?subject=${subject}&body=${body}`;
+
+      window.location.href = mailtoLink;
       setStatus({ type: 'success', message: t.contact.successMessage });
       setFormData({ name: '', email: '', message: '' });
     } catch {
@@ -35,11 +42,10 @@ const Contact: React.FC = () => {
     }
   };
 
+  const { dotTexture, buttonGradient } = useThemeColors();
   const isDark = theme.palette.mode === 'dark';
-  const cardGradient = isDark
-    ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
-    : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)';
-
+  const sectionBackground = isDark ? '#101638' : '#EFF4F9';
+  const sectionTexture = dotTexture;
 
   return (
     <Box
@@ -47,9 +53,11 @@ const Contact: React.FC = () => {
       id="contact"
       sx={{
         py: 12,
-        background: isDark
-          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
+        backgroundColor: sectionBackground,
+        backgroundImage: sectionTexture,
+        backgroundSize: '24px 24px, 36px 36px',
+        backgroundRepeat: 'repeat',
+        backgroundBlendMode: 'normal',
       }}
     >
       <Container maxWidth="md">
@@ -76,7 +84,20 @@ const Contact: React.FC = () => {
 
         {/* Content */}
         <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-          <Card sx={{ background: cardGradient, border: `1px solid ${theme.palette.divider}`, p: 4, maxWidth: '500px', width: '100%' }}>
+          <Card
+            sx={{
+              background: isDark
+                ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(168, 85, 247, 0.03))'
+                : 'linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(52, 211, 153, 0.03))',
+              border: `1px solid ${theme.palette.divider}`,
+              borderRadius: 2,
+              backdropFilter: 'blur(10px)',
+              boxShadow: 'none',
+              p: 4,
+              maxWidth: '500px',
+              width: '100%',
+            }}
+          >
             <Typography variant="h6" sx={{ mb: 3, fontWeight: 700 }}>
               {t.contact.contactTitle}
             </Typography>
@@ -119,7 +140,7 @@ const Contact: React.FC = () => {
                 disabled={loading}
                 sx={{
                   py: 1.5,
-                  background: isDark ? 'linear-gradient(90deg, #8B5CF6, #A78BFA)' : 'linear-gradient(90deg, #10B981, #34D399)',
+                  background: buttonGradient,
                   '&:hover': { transform: 'translateY(-2px)', boxShadow: isDark ? '0 8px 20px rgba(139, 92, 246, 0.4)' : '0 8px 20px rgba(16, 185, 129, 0.4)' },
                 }}
               >

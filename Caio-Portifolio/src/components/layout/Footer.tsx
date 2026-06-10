@@ -18,9 +18,12 @@ const Footer: React.FC = () => {
       component="footer"
       sx={{
         background: isDark
-          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
-        borderTop: `1px solid ${theme.palette.divider}`,
+          ? 'rgba(15, 15, 30, 0.92)'
+          : 'rgba(249, 250, 251, 0.96)',
+        backdropFilter: 'blur(14px)',
+        boxShadow: isDark
+          ? '0 -10px 30px rgba(0, 0, 0, 0.16)'
+          : '0 -10px 30px rgba(15, 23, 42, 0.08)',
         py: 4,
       }}
     >

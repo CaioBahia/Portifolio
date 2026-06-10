@@ -35,9 +35,7 @@ const About: React.FC = () => {
       id="about"
       sx={{
         py: 12,
-        background: isDark
-          ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-          : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)',
+        backgroundColor: isDark ? '#0F0F1E' : '#F9FAFB',
       }}
     >
       <Container maxWidth="lg">

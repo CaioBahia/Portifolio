@@ -2,20 +2,16 @@ import React from 'react';
 import { Box, Container, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { useTranslation } from '../../i18n/useTranslation';
+import { useThemeColors } from '../shared/hooks';
 
 const Home: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
-  const isDark = theme.palette.mode === 'dark';
-  const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
-  const bgGradient = isDark
-    ? 'linear-gradient(135deg, #0F0F1E 0%, #1A1A2E 50%, #16213e 100%)'
-    : 'linear-gradient(135deg, #F9FAFB 0%, #FFFFFF 50%, #E9F5F0 100%)';
-
-  const blobColor1 = isDark ? 'rgba(139, 92, 246, 0.1)' : 'rgba(16, 185, 129, 0.1)';
-  const blobColor2 = isDark ? 'rgba(168, 85, 247, 0.1)' : 'rgba(52, 211, 153, 0.1)';
+  const { isDark, gradientColor, dotTexture } = useThemeColors();
+  const bgBackground = isDark ? '#0B1228' : '#F5F9FC';
+  const bgTexture = dotTexture;
 
   return (
     <Box
@@ -28,38 +24,14 @@ const Home: React.FC = () => {
         justifyContent: 'center',
         position: 'relative',
         overflow: 'hidden',
-        background: bgGradient,
+        backgroundColor: bgBackground,
+        backgroundImage: bgTexture,
+        backgroundSize: '24px 24px, 36px 36px',
+        backgroundRepeat: 'repeat',
+        backgroundBlendMode: 'normal',
         pt: 8,
       }}
     >
-      {/* Animated Background */}
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '400px',
-          height: '400px',
-          borderRadius: '50%',
-          background: blobColor1,
-          filter: 'blur(60px)',
-          top: '-100px',
-          right: '-100px',
-          animation: 'float 6s ease-in-out infinite',
-        }}
-      />
-      <Box
-        sx={{
-          position: 'absolute',
-          width: '300px',
-          height: '300px',
-          borderRadius: '50%',
-          background: blobColor2,
-          filter: 'blur(50px)',
-          bottom: '-50px',
-          left: '-50px',
-          animation: 'float 8s ease-in-out infinite',
-        }}
-      />
-
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           sx={{
@@ -198,15 +170,6 @@ const Home: React.FC = () => {
             to {
               opacity: 1;
               transform: translateY(0);
-            }
-          }
-
-          @keyframes float {
-            0%, 100% {
-              transform: translateY(0px);
-            }
-            50% {
-              transform: translateY(-20px);
             }
           }
 

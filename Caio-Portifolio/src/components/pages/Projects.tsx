@@ -15,6 +15,8 @@ import {
 } from '@mui/material';
 import { GitHub as GitHubIcon, OpenInNew as OpenInNewIcon } from '@mui/icons-material';
 import { useTranslation } from '../../i18n/useTranslation';
+import type { TranslatedProject } from '../../types';
+import { useThemeColors } from '../shared/hooks';
 
 interface Project {
   id: string;
@@ -119,16 +121,11 @@ const projects: Project[] = [
 const Projects: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
-  const isDark = theme.palette.mode === 'dark';
-  const gradientColor = isDark ? 'linear-gradient(45deg, #8B5CF6 30%, #A78BFA 90%)' : 'linear-gradient(45deg, #10B981 30%, #34D399 90%)';
-  const purpleGradient = isDark
-    ? 'linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(168, 85, 247, 0.05) 100%)'
-    : 'linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.05) 100%)';
-  const boxShadowColor = isDark ? 'rgba(139, 92, 246, 0.2)' : 'rgba(16, 185, 129, 0.15)';
+  const { isDark, gradientColor, purpleGradient, boxShadowColor } = useThemeColors();
   const [openDialog, setOpenDialog] = useState<string | null>(null);
 
   // Create projects array with translations
-  const projectsData: Project[] = t.projects.projects.map((translatedProject: any, index: number) => ({
+    const projectsData: Project[] = t.projects.projects.map((translatedProject: TranslatedProject, index: number) => ({
   id: `project-${index + 1}`,
   title: translatedProject.title,
   description: translatedProject.description,
