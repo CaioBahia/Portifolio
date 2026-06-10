@@ -4,5 +4,9 @@ import tsconfigPaths from 'vite-tsconfig-paths'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Caio-Portifolio/',
   plugins: [react(), tsconfigPaths()],
+  build: {
+    outDir: 'docs',
+  },
 })
