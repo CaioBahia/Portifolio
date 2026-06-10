@@ -235,19 +235,40 @@ const Stacks: React.FC = () => {
             backdropFilter: 'blur(10px)',
             border: `1px solid ${theme.palette.divider}`,
             borderRadius: 2,
-            overflow: 'hidden',
+            overflow: 'clip',
           }}
         >
           <Tabs
             value={activeTab}
             onChange={(_, newValue) => setActiveTab(newValue)}
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
             sx={{
-              px: 3,
+              px: { xs: 1, sm: 3 },
               borderBottom: `2px solid ${theme.palette.divider}`,
-                '& .MuiTabs-indicator': {
+              '& .MuiTabs-scroller': {
+                overflowX: 'auto !important',
+                WebkitOverflowScrolling: 'touch',
+                touchAction: 'pan-x',
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                '&::-webkit-scrollbar': { display: 'none' },
+              },
+              '& .MuiTabs-flexContainer': {
+                gap: { xs: 0.5, sm: 1 },
+              },
+              '& .MuiTabs-indicator': {
                 background: isDark
                   ? 'linear-gradient(90deg, #1e40af, #3b82f6)'
                   : 'linear-gradient(90deg, #10B981, #34D399)',
+              },
+              '& .MuiTab-root': {
+                minWidth: 'auto',
+                flexShrink: 0,
+                whiteSpace: 'nowrap',
+                fontSize: { xs: '0.8rem', sm: '0.875rem' },
+                px: { xs: 1.5, sm: 2 },
               },
             }}
           >
